@@ -18,8 +18,8 @@ datasets:
     name: Rain13k
     type: PairedImageDataset
 
-    dataroot_gt: /content/drive/MyDrive/test/Rain13k/test/Rain100H/target
-    dataroot_lq: /content/drive/MyDrive/test/Rain13k/test/Rain100H/input
+    dataroot_gt: /content/drive/MyDrive/test/Rain100H/target
+    dataroot_lq: /content/drive/MyDrive/test/Rain100H/input
 
     io_backend:
       type: disk
