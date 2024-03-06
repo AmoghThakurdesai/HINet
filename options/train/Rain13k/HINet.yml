@@ -16,8 +16,8 @@ datasets:
   train:
     name: Rain13k
     type: PairedImageDataset
-    dataroot_gt: ./datasets/Rain13k/train/target.lmdb
-    dataroot_lq: ./datasets/Rain13k/train/input.lmdb
+    dataroot_gt: /content/HINet/datasets/Rain13k/train/target.lmdb
+    dataroot_lq: /content/HINet/datasets/Rain13k/train/input.lmdb
 
     filename_tmpl: '{}'
     io_backend:
