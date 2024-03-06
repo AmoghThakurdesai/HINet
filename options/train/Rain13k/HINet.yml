@@ -16,12 +16,12 @@ datasets:
   train:
     name: Rain13k
     type: PairedImageDataset
-    dataroot_gt: /content/HINet/datasets/Rain13k/train/target.lmdb
-    dataroot_lq: /content/HINet/datasets/Rain13k/train/input.lmdb
+    dataroot_gt: /content/drive/MyDrive/DATASET/Kaggle_Dataset/Clear/val
+    dataroot_lq: /content/drive/MyDrive/DATASET/Kaggle_Dataset/Rainy(input)/val
 
     filename_tmpl: '{}'
     io_backend:
-      type: lmdb
+      type: folder
 
     gt_size: 256
     use_flip: true
