@@ -25,6 +25,8 @@ from basicsr.utils.dist_util import get_dist_info, init_dist
 from basicsr.utils.options import dict2str, parse
 
 
+import os
+
 def parse_options(is_train=True):
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -34,9 +36,14 @@ def parse_options(is_train=True):
         choices=['none', 'pytorch', 'slurm'],
         default='none',
         help='job launcher')
-    parser.add_argument('--local_rank', type=int, default=0)
     args = parser.parse_args()
     opt = parse(args.opt, is_train=is_train)
+
+    # Check if 'LOCAL_RANK' is in the environment variables
+    if 'LOCAL_RANK' in os.environ:
+        local_rank = int(os.environ['LOCAL_RANK'])
+    else:
+        local_rank = 0  # or any default value
 
     # distributed settings
     if args.launcher == 'none':
@@ -56,7 +63,7 @@ def parse_options(is_train=True):
     if seed is None:
         seed = random.randint(1, 10000)
         opt['manual_seed'] = seed
-    set_random_seed(seed + opt['rank'])
+    set_random_seed(seed + local_rank)
 
     return opt
 
