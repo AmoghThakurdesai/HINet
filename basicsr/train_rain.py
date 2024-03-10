@@ -127,25 +127,22 @@ def create_train_val_dataloader(opt, logger):
 
             val_loaders = []
 
-            for name in names:
-                dataset_opt['dataroot_gt'] = os.path.join('/content/rainy/rainy/d rainy', name, 'target')
-                dataset_opt['dataroot_lq'] = os.path.join('/content/rainy/rainy/rainy', name, 'input')
-                dataset_opt['io_backend'] = {'type': 'disk'}
+            dataset_opt['dataroot_gt'] = ('/content/rainy/rainy/d rainy')
+            dataset_opt['dataroot_lq'] = ('/content/rainy/rainy/rainy')
+            dataset_opt['io_backend'] = {'type': 'disk'}
 
 
-                val_set = create_dataset(dataset_opt)
-                val_loader = create_dataloader(
-                    val_set,
-                    dataset_opt,
-                    num_gpu=opt['num_gpu'],
-                    dist=opt['dist'],
-                    sampler=None,
-                    seed=opt['manual_seed'])
-                logger.info(
-                    f'Number of val images/folders in {dataset_opt["name"]}: '
-                    f'{len(val_set)}')
-
-                val_loaders.append(val_loader)
+            val_set = create_dataset(dataset_opt)
+            val_loader = create_dataloader(
+                val_set,
+                dataset_opt,
+                num_gpu=opt['num_gpu'],
+                dist=opt['dist'],
+                sampler=None,
+                seed=opt['manual_seed'])
+            logger.info(
+                f'Number of val images/folders in {dataset_opt["name"]}: '
+                f'{len(val_set)}')
         else:
             raise ValueError(f'Dataset phase {phase} is not recognized.')
 
