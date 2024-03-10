@@ -16,8 +16,8 @@ datasets:
   train:
     name: Rain13k
     type: PairedImageDataset
-    dataroot_gt: /content/drive/MyDrive/DATASET/Kaggle_Dataset/Clear/val
-    dataroot_lq: /content/drive/MyDrive/DATASET/Kaggle_Dataset/Rainy(input)/val
+    dataroot_gt: /content/kaggledataset/Kaggle_Dataset/Clear/val
+    dataroot_lq: /content/kaggledataset/Kaggle_Dataset/Rainy(input)/val
 
     filename_tmpl: '{}'
     io_backend:
