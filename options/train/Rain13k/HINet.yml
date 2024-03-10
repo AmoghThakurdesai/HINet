@@ -21,7 +21,7 @@ datasets:
 
     filename_tmpl: '{}'
     io_backend:
-      type: folder
+      type: disk
 
     gt_size: 256
     use_flip: true
