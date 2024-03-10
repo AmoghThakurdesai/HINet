@@ -128,8 +128,8 @@ def create_train_val_dataloader(opt, logger):
             val_loaders = []
 
             for name in names:
-                dataset_opt['dataroot_gt'] = os.path.join('./datasets/Rain13k/test', name, 'target')
-                dataset_opt['dataroot_lq'] = os.path.join('./datasets/Rain13k/test', name, 'input')
+                dataset_opt['dataroot_gt'] = os.path.join('/content/rainy/rainy/d rainy', name, 'target')
+                dataset_opt['dataroot_lq'] = os.path.join('/content/rainy/rainy/rainy', name, 'input')
                 dataset_opt['io_backend'] = {'type': 'disk'}
 
 
