@@ -32,9 +32,11 @@ datasets:
     num_worker_per_gpu: 2
     batch_size_per_gpu: 8
     dataset_enlarge_ratio: 1
-    prefetch_mode: ~
+    prefetch_mode: cuda
+    pin_memory: True
 
   val:
+    
     name: Rain13k
     type: PairedImageDataset
     dataroot_gt: ~
@@ -69,7 +71,7 @@ train:
     T_max: 400000
     eta_min: !!float 1e-7
 
-  total_iter: 400000
+  total_iter: 20
   warmup_iter: 10 # no warm up
 
   # losses
@@ -81,9 +83,9 @@ train:
 
 # validation settings
 val:
-#  val_freq: 10
+  val_freq: 10
 #  val_freq: !!float 2.5e4
-  val_freq: !!float 2e4
+#  val_freq: !!float 2e4
   save_img: true
   grids: true
   crop_size: 256
