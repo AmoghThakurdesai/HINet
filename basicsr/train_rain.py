@@ -143,6 +143,7 @@ def create_train_val_dataloader(opt, logger):
             logger.info(
                 f'Number of val images/folders in {dataset_opt["name"]}: '
                 f'{len(val_set)}')
+            val_loaders.append(val_loader)
         else:
             raise ValueError(f'Dataset phase {phase} is not recognized.')
 
@@ -233,15 +234,21 @@ def main():
     epoch = start_epoch
     best_psnr = -1.
     best_iter = -1
+    print("\n\n\n Training started \n\n")
     while current_iter <= total_iters:
         train_sampler.set_epoch(epoch)
+        print(type(prefetcher))
         prefetcher.reset()
+        print("\n\n\n reset prefetcher \n\n\n")
+        
         train_data = prefetcher.next()
-
+        print(train_data is None)
+        print("\n\n\n this is the line just before train_data is not none \n\n\n")
         while train_data is not None:
             data_time = time.time() - data_time
 
             current_iter += 1
+            print(f"Current iter:"+ str(current_iter))
             if current_iter > total_iters:
                 break
             # update learning rate
@@ -251,6 +258,8 @@ def main():
             model.feed_data(train_data)
             model.optimize_parameters(current_iter)
             iter_time = time.time() - iter_time
+            
+            print(f"iter_time:"+ str(iter_time))
             # log
             if current_iter % opt['logger']['print_freq'] == 0:
                 log_vars = {'epoch': epoch, 'iter': current_iter}
@@ -267,7 +276,7 @@ def main():
             # validation
             if opt.get('val') is not None and (current_iter %
                                                opt['val']['val_freq'] == 0):
-
+                print(f"Val_loaders: {val_loaders}")
                 cnt = 0.
                 metric = 0.
                 for val_loader in val_loaders:
